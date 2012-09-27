@@ -1,0 +1,30 @@
+(define (f n)
+  (cond ((< n 3) n)
+        (else (+ (f (- n 1)) 
+                 (* 2 (f (- n 2)))
+                 (* 3 (f (- n 3)))
+                 ))
+        )
+  )
+
+(f 2)
+(f 3)
+(f 4)
+
+(define (g n)
+  (define (iter x-1 x-2 x-3 count)
+    (cond ((= count n) (+ x-1 (* 2 x-2) (* 3 x-3)))
+          (else (iter (+ x-1 (* 2 x-2) (* 3 x-3)) 
+                      x-1 x-2 (+ count 1)))
+          ))
+  (cond ((< n 3) n)
+        (else (iter 2 1 0 3))
+        )
+  )
+
+(g 2)
+(g 3)
+
+; is g noticeably faster?
+(f 25)
+(g 25000 )
